@@ -1,6 +1,6 @@
 import torch.nn.functional as F
-from torch import nn
-
+from torch import nn, Tensor
+import pytest
 
 class MyAwesomeModel(nn.Module):
     def __init__(self, input_size, output_size):
@@ -14,8 +14,11 @@ class MyAwesomeModel(nn.Module):
 
         self.relu = nn.ReLU()
 
-    def forward(self, x):
-
+    def forward(self, x: Tensor)-> Tensor: #Hardcoded inputs, not good:
+        if x.ndim != 2:
+            raise ValueError('Expected input to a 2D tensor')
+        if x.shape[1] != 784:
+            raise ValueError('Expected each sample to have shape 784 input values')
         x = self.relu(self.fc1(x))
         x = self.relu(self.fc2(x))
         x = self.relu(self.fc3(x))
