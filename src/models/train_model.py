@@ -3,6 +3,8 @@ from torch.utils.data import DataLoader, TensorDataset
 import torch
 from matplotlib import pyplot as plt
 from torch import nn, optim
+## M15 Unittesting
+from pytest import warns, raises
 
 model =  model.MyAwesomeModel(784, 10)
 
